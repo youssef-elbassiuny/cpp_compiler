@@ -90,9 +90,14 @@ struct node_assignment
     token ident;
     node_expr* expr;
 };
+struct node_while
+{
+    node_expr* expr;
+    node_scope* scope;
+};
 struct node_st
 {
-    variant<node_let* , node_assignment* ,  node_if* , node_scope* , node_return*>var;
+    variant<node_let* , node_assignment* ,  node_if* , node_scope* , node_return* , node_while*>var;
 };
 struct node_prog
 {
@@ -474,6 +479,51 @@ public:
             node_st* st=m_allocator.alloc<node_st>();
             st->var=_if;
             return st;
+        }
+        else if (peek().has_value() && peek().value().type==token_type::_while)
+        {
+            consume();
+            if (peek().has_value() && peek().value().type==token_type::open)
+            {
+                consume();
+            }
+            else
+            {
+                cerr<<"expected '('"<<endl;
+                exit(EXIT_FAILURE);
+            }
+            node_while* _while=m_allocator.alloc<node_while>();
+            if (auto expr =parse_expr())
+            {
+                _while->expr=expr.value();
+            }
+            else
+            {
+                cerr<<"invalid expr"<<endl;
+                exit(EXIT_FAILURE);
+            }
+            if (peek().has_value() && peek().value().type==token_type::close)
+            {
+                consume();
+            }
+            else
+            {
+                cerr<<"expexted ')'"<<endl;
+                exit(EXIT_FAILURE);
+            }
+            if (auto scope =parse_scope())
+            {
+                _while->scope=scope.value();
+            }
+            else
+            {
+                cerr<<"expected scope"<<endl;
+                exit(EXIT_FAILURE);
+            }
+            node_st* st =m_allocator.alloc<node_st>();
+            st->var=_while;
+            return st;
+
         }
         else
         {

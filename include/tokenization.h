@@ -21,8 +21,8 @@ enum class token_type
     sub,
     div,
     star,
-    plus
-
+    plus,
+    _while
 
 };
 
@@ -90,6 +90,11 @@ public:
                 else if (buf=="let")
                 {
                     tokens.push_back({.type=token_type::let});
+                    buf.clear();
+                }
+                else if (buf=="while")
+                {
+                    tokens.push_back({.type = token_type::_while});
                     buf.clear();
                 }
                 else

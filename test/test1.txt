@@ -1,51 +1,7 @@
-let x = 10;
-let y = 20;
-let z = x + y * 2;
-let a = (x + y) * 2;
-
-x = z - 5;
-y = x / 5;
-z = x * y + 10;
-
-{
-    let inner = x + y;
-    inner = inner * 2;
-
-    if (inner)
-    {
-        let result = (inner + 10) * 2;
-
-        if (result)
-        {
-            let deep = result / 2;
-            return deep;
-        }
-        elif (x)
-        {
-            let value = x + 100;
-            return value;
-        }
-        elif (y * 2)
-        {
-            let value = y - 5;
-            return value;
-        }
-        else
-        {
-            let value = 0;
-            return value;
-        }
-    }
-    elif (x + y)
-    {
-        let result = x * (y + 5);
-        return result;
-    }
-    else
-    {
-        let result = 999;
-        return result;
-    }
+let x =0;
+let crt =0;
+while(x){
+x=x-1;
+crt=crt+1;
 }
-
-return z;
+return crt;

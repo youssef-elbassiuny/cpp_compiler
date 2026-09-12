@@ -189,6 +189,22 @@ public:
                 m_output<< end_label<<":"<<endl;
             }
         }
+        else if (holds_alternative<node_while*>(st->var))
+        {
+            node_while* _while=get<node_while*>(st->var);
+            string label_start=create_label();
+            string label_end=create_label();
+            m_output<<label_start<<":"<<endl;
+            gen_exp(_while->expr);
+            pop("rax");
+            m_output<<"     test rax , rax"<<endl;
+            m_output<<"     jz "<<label_end<<endl;
+            gen_scope(_while->scope);
+            m_output<<"     jmp "<<label_start<<endl;
+            m_output<<label_end<<":"<<endl;
+
+
+        }
     }
 
 
