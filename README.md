@@ -16,72 +16,61 @@ Before using the compiler, make sure you have the following installed:
 
 First, clone the repository:
 
-```bash
-git clone https://github.com/youssef-elbassiuny/comp.git
-cd comp
-```
-
-
+    git clone https://github.com/youssef-elbassiuny/comp.git
+    cd comp
 
 ## Complete Workflow
 
 The complete workflow from the `build` directory is:
 
-```bash
-cmake -G "Unix Makefiles" ..
-make
-./main ../test/test1.txt
-nasm -felf64 aut.asm
-ld -o aut aut.o
-./aut
-echo $?
-```
+    cmake -G "Unix Makefiles" ..
+    make
+    ./main ../test/test1.txt
+    nasm -felf64 aut.asm
+    ld -o aut aut.o
+    ./aut
+    echo $?
 
 ## Example Program
 
 Example source code:
 
-```text
-let x = 10;
-let y = 20;
+    let x = 10;
+    let y = 20;
 
-let z = x + y * 2;
+    let z = x + y * 2;
 
-if (z)
-{
-    let result = z / 2;
-    return result;
-}
-else
-{
-    return 0;
-}
-```
+    while (x)
+    {
+        x = x - 1;
+    }
+
+    if (z)
+    {
+        let result = z / 2;
+        return result;
+    }
+    else
+    {
+        return 0;
+    }
 
 Save the program as a `.txt` file and pass it to the compiler:
 
-```bash
-./main ../test/test1.txt
-```
+    ./main ../test/test1.txt
 
 Then assemble and link the generated assembly:
 
-```bash
-nasm -felf64 aut.asm
-ld -o aut aut.o
-```
+    nasm -felf64 aut.asm
+    ld -o aut aut.o
 
 Finally, run it:
 
-```bash
-./aut
-```
+    ./aut
 
 And check the return value:
 
-```bash
-echo $?
-```
+    echo $?
 
 ## Supported Features
 
@@ -98,6 +87,7 @@ The compiler currently supports:
 - `if`
 - `elif`
 - `else`
+- `while`
 - Nested scopes
 - `return`
 - x86-64 assembly generation
@@ -106,47 +96,43 @@ The compiler currently supports:
 
 The compiler works through several stages:
 
-```text
-Source Code
-     |
-     v
-Tokenizer
-     |
-     v
-Tokens
-     |
-     v
-Parser
-     |
-     v
-AST (Abstract Syntax Tree)
-     |
-     v
-Code Generator
-     |
-     v
-x86-64 Assembly
-     |
-     v
-NASM
-     |
-     v
-Object File
-     |
-     v
-Executable
-```
+    Source Code
+         |
+         v
+    Tokenizer
+         |
+         v
+    Tokens
+         |
+         v
+    Parser
+         |
+         v
+    AST (Abstract Syntax Tree)
+         |
+         v
+    Code Generator
+         |
+         v
+    x86-64 Assembly
+         |
+         v
+    NASM
+         |
+         v
+    Object File
+         |
+         v
+    Executable
 
 ## Project Structure
 
-```text
-comp/
-├── include/
-├── scr/
-├── test/
-├── CMakeLists.txt
-└── README.md
-```
+    comp/
+    ├── include/
+    ├── scr/
+    ├── test/
+    ├── CMakeLists.txt
+    └── README.md
 
 ## Technologies
 

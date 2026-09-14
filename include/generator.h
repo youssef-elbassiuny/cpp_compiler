@@ -177,17 +177,18 @@ public:
             node_if* _if=get<node_if*>(st->var);
             gen_exp(_if->expr);
             pop("rax");
-            string label=create_label();
+            string false_label=create_label();
+            string end_label=create_label();
             m_output<<"     test rax , rax"<<endl;
-            m_output<<"     jz "<<label<<endl;
+            m_output<<"     jz "<<false_label<<endl;
             gen_scope(_if->scope);
-            m_output<<label<<":"<<endl;
+            m_output<<"     jmp "<<end_label<<endl;
+            m_output<<false_label<<":"<<endl;
             if (_if->pred.has_value())
             {
-                string end_label=create_label();
                 gen_if_pred(_if->pred.value(), end_label);
-                m_output<< end_label<<":"<<endl;
             }
+            m_output<< end_label<<":"<<endl;
         }
         else if (holds_alternative<node_while*>(st->var))
         {

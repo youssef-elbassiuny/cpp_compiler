@@ -1,7 +1,45 @@
-let x =0;
-let crt =0;
-while(x){
-x=x-1;
-crt=crt+1;
+
+
+// Exercises: let, assignment, arithmetic + precedence, grouped expr,
+// while, if / elif / else, nested scopes, return.
+// Expected exit code: 49
+
+/* arithmetic + operator precedence + parentheses
+   (unused value, just to prove the expression grammar works) */
+
+let a = 5;
+let b = 10;
+let sum = a + b * 2 - (a - 1) / 1;   // 5 + 20 - 4 = 21
+
+// while loop: sums 3 + 2 + 1
+let x = 3;
+let result = 0;
+while (x)
+{
+    result = result + x;
+    x = x - 1;
 }
-return crt;
+// result == 6 here
+
+// if / elif / else chain
+if (result)
+{
+    let i = 1;
+    result = result + i;   // result == 7
+}
+elif (a)
+{
+    result = 0;
+}
+else
+{
+    result = 99;
+}
+
+// bare nested scope: variables declared inside disappear after the block
+{
+    let scoped = 42;
+    result = result + scoped;  // result == 49
+}
+
+return result;
